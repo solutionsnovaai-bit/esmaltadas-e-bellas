@@ -4,9 +4,9 @@
 .cor-entrada { position: absolute; left: 0; top: -1px; z-index: 4; width: 100%; height: clamp(70px, 9vw, 130px); color: var(--seda); pointer-events: none; }
 .cor-palco { position: sticky; top: 0; height: 100svh; overflow: hidden; background: radial-gradient(60% 70% at 78% 60%, #3a1428 0%, var(--noite) 68%); }
 .cor-grade { position: absolute; inset: 0; display: flex; align-items: center; padding-top: var(--topo-h); }
-.cor-letreiro { position: relative; z-index: 1; max-width: min(720px, 52vw); }
+.cor-letreiro { position: relative; z-index: 1; max-width: min(780px, 52vw); }
 .cor-letreiro .selo-texto { color: var(--rosa); }
-.cor-frase { display: grid; margin-top: 24px; font-family: var(--serifa); font-size: clamp(3rem, 7.1vw, 8rem); line-height: .94; letter-spacing: -.035em; }
+.cor-frase { display: grid; margin-top: 24px; font-family: var(--serifa); font-size: clamp(3rem, 7.1vw, 6.6rem); line-height: .94; letter-spacing: -.035em; }
 .cor-frase > span { display: block; }
 .cor-palavra-caixa { position: relative; display: block; height: 1.1em; overflow: hidden; }
 .cor-palavra-caixa em { position: absolute; left: 0; top: 0; display: block; font-style: italic; color: var(--rosa); white-space: nowrap; }

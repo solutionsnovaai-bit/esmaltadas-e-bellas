@@ -57,14 +57,15 @@ export function Rodape() {
       </div>
     </div>
 
-    <p ref={assinatura} className="rodape-assinatura" aria-hidden="true">
-      <motion.span style={reduzido ? undefined : { y: yAss }}>
+    {/* O gatilho fica no parágrafo inteiro: as letras deslocadas ficam recortadas e a detecção de visibilidade não as veria. */}
+    <motion.p ref={assinatura} className="rodape-assinatura" aria-hidden="true"
+      initial="fora" whileInView="dentro" viewport={{ once: true, amount: .2 }}>
+      <motion.span style={reduzido ? undefined : { y: yAss }} variants={{ fora: {}, dentro: { transition: { staggerChildren: .06 } } }}>
         {Array.from(rodape.assinatura).map((l, i) => <motion.span key={i} className={l === '.' ? 'is-ponto' : ''}
-          initial={{ y: '60%', opacity: 0 }} whileInView={{ y: '0%', opacity: 1 }} viewport={{ once: true, amount: .4 }}
-          transition={{ duration: 1.3, delay: i * .06, ease: ease.expo }}>{l}</motion.span>)}
+          variants={{ fora: { y: '60%', opacity: 0 }, dentro: { y: '0%', opacity: 1, transition: { duration: 1.3, ease: ease.expo } } }}>{l}</motion.span>)}
       </motion.span>
       <Brilho className="rodape-brilho anima" />
-    </p>
+    </motion.p>
 
     <div className="conteiner rodape-base">
       <span>© {new Date().getFullYear()} {site.nome}</span>

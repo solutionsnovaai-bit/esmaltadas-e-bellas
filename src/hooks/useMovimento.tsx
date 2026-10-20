@@ -1,16 +1,19 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
-import { MotionConfig, useReducedMotion } from 'motion/react'
+import { MotionConfig } from 'motion/react'
 
-const CHAVE = 'eb-movimento-reduzido'
+const CHAVE = 'eb-movimento-reduzido-v2'
 const Contexto = createContext({ reduzido: false, escolhaUsuario: false, alternar: () => {} })
 
-/** Junta a preferência do sistema com o botão "Reduzir animações" do rodapé. */
+/*
+  O site roda com todos os efeitos em qualquer aparelho, inclusive no PC com as
+  "animações do sistema" desligadas (Windows costuma vir assim e isso apagava a cena do esmalte).
+  Quem prefere menos movimento usa o botão "Reduzir animações" do rodapé; a escolha fica salva no navegador.
+*/
 export function MovimentoProvider({ children }: { children: ReactNode }) {
-  const sistema = Boolean(useReducedMotion())
   const [escolhaUsuario, setEscolhaUsuario] = useState(() => {
     try { return localStorage.getItem(CHAVE) === '1' } catch { return false }
   })
-  const reduzido = sistema || escolhaUsuario
+  const reduzido = escolhaUsuario
 
   useEffect(() => {
     document.documentElement.dataset.movimento = reduzido ? 'reduzido' : 'pleno'
