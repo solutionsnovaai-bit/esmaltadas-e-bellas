@@ -1,7 +1,7 @@
 import { lazy, Suspense, useCallback, useLayoutEffect, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useSpring } from 'motion/react'
 import { MovimentoProvider, useMovimento } from './hooks/useMovimento'
-import { useRolagem } from './hooks/useRolagem'
+import { useRolagem, rolarPara } from './hooks/useRolagem'
 import type { Foto } from './conteudo/fotos'
 import Abertura, { modoAbertura, type ModoAbertura } from './componentes/abertura/Abertura'
 import { Topo } from './componentes/layout/Topo'
@@ -25,21 +25,26 @@ const Lightbox = lazy(() => import('./componentes/layout/Lightbox'))
 function Experiencia() {
   const { reduzido } = useMovimento()
   const [modo] = useState<ModoAbertura>(() => modoAbertura(reduzido))
-  const [abertura, setAbertura] = useState(modo !== 'nenhuma')
-  const [pronto, setPronto] = useState(modo === 'nenhuma')
+  const [abertura, setAbertura] = useState(true)
+  const [pronto, setPronto] = useState(false)
   const [selecao, setSelecao] = useState<{ fotos: Foto[]; i: number } | null>(null)
   const { scrollYProgress } = useScroll()
   const progresso = useSpring(scrollYProgress, { stiffness: 160, damping: 35 })
 
+  /* Toda carga começa do topo, com a abertura inteira. */
   useLayoutEffect(() => {
-    if (modo === 'nenhuma') return
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
     window.scrollTo(0, 0)
-  }, [modo])
+  }, [])
 
   useRolagem(!abertura)
   const aoSair = useCallback(() => setPronto(true), [])
-  const aoFim = useCallback(() => setAbertura(false), [])
+  const aoFim = useCallback(() => {
+    setAbertura(false)
+    /* Quem chegou por um link com âncora (ex.: #agendar) vê a abertura e depois desce até a seção. */
+    const ancora = location.hash
+    if (ancora.length > 1) window.setTimeout(() => { try { rolarPara(ancora, reduzido) } catch { /* âncora inválida */ } }, 450)
+  }, [reduzido])
   const abrir = useCallback((fotos: Foto[], i: number) => setSelecao({ fotos, i }), [])
 
   return <>
