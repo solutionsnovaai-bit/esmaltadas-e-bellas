@@ -2,7 +2,7 @@ import { useRef, type MouseEvent } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
 import { ArrowUp } from 'lucide-react'
 import { navegacao, rodape } from '../../conteudo/textos'
-import { linkConversa, site, temWhatsApp } from '../../conteudo/site'
+import { linkConversa, site, telefoneVisivel, temWhatsApp } from '../../conteudo/site'
 import { useMovimento } from '../../hooks/useMovimento'
 import { rolarPara } from '../../hooks/useRolagem'
 import { ease } from '../../lib/ease'
@@ -43,7 +43,7 @@ export function Rodape() {
           <p className="rodape-rotulo">Fale com a gente</p>
           <ul>
             <li><a href={site.instagram} target="_blank" rel="noopener noreferrer"><BrandIcon brand="instagram" /> Instagram</a></li>
-            {temWhatsApp && <li><a href={linkConversa()} target="_blank" rel="noopener noreferrer"><BrandIcon brand="whatsapp" /> WhatsApp</a></li>}
+            {temWhatsApp && <li><a href={linkConversa()} target="_blank" rel="noopener noreferrer"><BrandIcon brand="whatsapp" /> {telefoneVisivel}</a></li>}
           </ul>
         </div>
         <div>

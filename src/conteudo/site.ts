@@ -1,11 +1,10 @@
 /*
   Contatos da Esmaltadas & Bellas.
 
-  WhatsApp: escreva o número aqui (país + DDD + número, só dígitos — ex.: 5511999999999)
-  ou defina VITE_WHATSAPP_NUMBER na Vercel. Enquanto estiver vazio, todos os botões
-  levam ao Instagram e a mensagem montada no agendamento é copiada para colar no Direct.
+  WhatsApp: país + DDD + número, só dígitos. Para trocar, edite NUMERO_WHATSAPP
+  (ou defina VITE_WHATSAPP_NUMBER na Vercel). Se ficar vazio, os botões levam ao Instagram.
 */
-const NUMERO_WHATSAPP = ''
+const NUMERO_WHATSAPP = '5511952376492'
 
 const numero = (NUMERO_WHATSAPP || import.meta.env.VITE_WHATSAPP_NUMBER || '').replace(/\D/g, '')
 
@@ -29,5 +28,10 @@ export const mensagens = {
 export function linkConversa(texto: string = mensagens.geral) {
   return temWhatsApp ? `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(texto)}` : site.instagram
 }
+
+/** Número para exibir: (11) 95237-6492. */
+export const telefoneVisivel = temWhatsApp
+  ? site.whatsapp.replace(/^55/, '').replace(/^(\d{2})(\d{4,5})(\d{4})$/, '($1) $2-$3')
+  : ''
 
 export const canalConversa = temWhatsApp ? 'WhatsApp' : 'Instagram'

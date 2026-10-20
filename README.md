@@ -27,14 +27,12 @@ npm run build    # versão final em dist/
 
 ## Contato e WhatsApp
 
-Instagram: https://www.instagram.com/esmaltadasebellas/
+- WhatsApp: (11) 95237-6492
+- Instagram: https://www.instagram.com/esmaltadasebellas/
 
-O número de WhatsApp ainda não foi informado. Enquanto estiver vazio, todos os botões levam ao Instagram e o formulário copia a mensagem para colar no Direct. Para ativar, escolha **um** dos caminhos:
+Todos os botões de agendar abrem o WhatsApp com a mensagem pronta; o formulário monta o pedido (nome, cuidados, cor, período) e abre a conversa para revisar antes de enviar. O número aparece também no rodapé.
 
-1. Edite `src/conteudo/site.ts` e preencha `NUMERO_WHATSAPP` (país + DDD + número, só dígitos, ex.: `5511999999999`); ou
-2. Na Vercel, crie a variável `VITE_WHATSAPP_NUMBER` com o mesmo formato e faça um novo deploy.
-
-Com o número, os botões passam a abrir o WhatsApp com a mensagem pronta e o link aparece no rodapé.
+Para trocar o número, edite `NUMERO_WHATSAPP` em `src/conteudo/site.ts` (país + DDD + número, só dígitos) ou defina `VITE_WHATSAPP_NUMBER` na Vercel. Se ficar vazio, os botões voltam a levar ao Instagram.
 
 ## Textos e fotos
 
