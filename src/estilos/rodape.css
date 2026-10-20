@@ -1,0 +1,53 @@
+/* ---------- Rodapé ---------- */
+.rodape { position: relative; padding-top: clamp(150px, 16vw, 240px); overflow: clip; background: radial-gradient(70% 50% at 50% 100%, #3d1529 0%, var(--noite) 70%); }
+.rodape-gotas { position: absolute; left: 0; top: -1px; width: 100%; height: clamp(80px, 11vw, 150px); color: var(--porcelana); }
+.rodape-convite { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 30px 60px; padding-bottom: clamp(56px, 7vw, 96px); border-bottom: 1px solid var(--linha-clara); }
+.rodape-titulo { font-size: clamp(2.8rem, 7vw, 7.4rem); }
+.rodape-acoes { display: flex; flex-wrap: wrap; gap: 12px; }
+.rodape-colunas { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 36px; padding-block: clamp(44px, 5vw, 72px); }
+.rodape-marca .marca { font-size: 1.7rem; }
+.rodape-marca .marca-e { color: var(--rosa); }
+.rodape-marca p { margin-top: 12px; color: rgb(251 244 238 / .6); }
+.rodape-rotulo { margin-bottom: 14px; font-size: .68rem; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--rosa); }
+.rodape ul { display: grid; gap: 8px; }
+.rodape ul a { display: inline-flex; align-items: center; gap: 8px; color: rgb(251 244 238 / .82); transition: color .3s, transform .4s var(--ease-expo); }
+.rodape ul a:hover { color: var(--creme); transform: translateX(4px); }
+.rodape-movimento { display: inline-flex; align-items: center; gap: 12px; font-size: .92rem; color: rgb(251 244 238 / .82); }
+.interruptor { position: relative; width: 40px; height: 22px; border-radius: 999px; background: rgb(251 244 238 / .18); transition: background .3s; }
+.interruptor i { position: absolute; left: 3px; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--creme); transition: transform .4s var(--ease-expo); }
+.rodape-movimento[aria-pressed='true'] .interruptor { background: var(--laca); }
+.rodape-movimento[aria-pressed='true'] .interruptor i { transform: translateX(18px); }
+.rodape-topo { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: .92rem; color: rgb(251 244 238 / .82); }
+.rodape-topo svg { width: 16px; height: 16px; }
+
+.rodape-assinatura {
+  position: relative; display: block; padding-inline: var(--margem); margin-bottom: -.12em; overflow: hidden;
+  font-family: var(--serifa); font-style: italic; font-weight: 400; font-size: clamp(7rem, 27vw, 27rem); line-height: .9; letter-spacing: -.05em;
+  color: var(--creme); text-align: center; white-space: nowrap; user-select: none;
+}
+.rodape-assinatura > span { display: inline-block; }
+.rodape-assinatura > span > span { display: inline-block; }
+.rodape-assinatura .is-ponto { color: var(--laca); }
+.rodape-brilho { position: absolute; right: 9%; top: 12%; width: clamp(40px, 6vw, 96px); height: clamp(40px, 6vw, 96px); fill: var(--rosa); animation: girar 12s linear infinite; }
+.rodape-base { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; padding-block: 22px max(22px, env(safe-area-inset-bottom)); border-top: 1px solid var(--linha-clara); font-size: .8rem; color: rgb(251 244 238 / .5); }
+
+@media (max-width: 860px) {
+  .rodape-colunas { grid-template-columns: 1fr 1fr; }
+  .rodape-marca { grid-column: 1 / -1; }
+  .rodape-acoes { width: 100%; }
+}
+
+/* ---------- Botão flutuante ---------- */
+.flutuante {
+  position: fixed; right: max(18px, var(--margem)); bottom: max(18px, env(safe-area-inset-bottom)); z-index: 70;
+  display: inline-flex; align-items: center; gap: 10px; height: 60px; padding: 0 22px 0 20px; border-radius: 999px;
+  background: var(--laca); color: var(--creme); font-weight: 700; font-size: .92rem;
+  box-shadow: 0 20px 40px -14px rgb(163 18 79 / .7);
+}
+.flutuante .brand-icon { width: 22px; height: 22px; }
+.flutuante-onda { position: absolute; inset: 0; border-radius: inherit; box-shadow: 0 0 0 0 rgb(210 31 107 / .5); animation: pulso 2.6s var(--ease-out) infinite; }
+@keyframes pulso { 0% { box-shadow: 0 0 0 0 rgb(210 31 107 / .45); } 100% { box-shadow: 0 0 0 18px rgb(210 31 107 / 0); } }
+@media (max-width: 640px) {
+  .flutuante { width: 58px; height: 58px; padding: 0; justify-content: center; }
+  .flutuante-rotulo { display: none; }
+}

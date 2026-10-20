@@ -1,13 +1,6 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import 'lenis/dist/lenis.css'
-import './fonts.css'
-import './styles.css'
-import './motion.css'
-import './typography.css'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './estilos/index.css'
 import App from './App'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode><App /></React.StrictMode>,
-)
-
+createRoot(document.getElementById('root')!).render(<StrictMode><App /></StrictMode>)

@@ -1,0 +1,72 @@
+/* ---------- Galeria ---------- */
+.galeria { background: var(--porcelana); }
+.galeria-cabeca { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px 64px; }
+.galeria-cabeca .titulo { margin-top: 20px; }
+.galeria-lado { display: grid; gap: 14px; max-width: 380px; }
+.galeria-contagem { display: inline-flex; align-items: center; gap: 8px; font-size: .78rem; font-weight: 700; letter-spacing: .08em; color: var(--laca); }
+.galeria-contagem .brilho { width: 14px; height: 14px; }
+
+.filtros { display: flex; flex-wrap: wrap; gap: 8px; margin-block: clamp(36px, 5vw, 56px) 30px; }
+.filtros button { position: relative; height: 44px; padding: 0 20px; border-radius: 999px; font-size: .86rem; font-weight: 700; box-shadow: inset 0 0 0 1px var(--linha); transition: color .35s; }
+.filtros button.is-ativo { color: var(--creme); box-shadow: none; }
+.filtro-marcador { position: absolute; inset: 0; border-radius: inherit; background: var(--ameixa); }
+.filtro-rotulo { position: relative; }
+
+.galeria-grade { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 22px); }
+.galeria-grade li:nth-child(4n + 2), .galeria-grade li:nth-child(4n + 4) { translate: 0 clamp(18px, 3vw, 46px); }
+.cartao { position: relative; display: block; width: 100%; perspective: 900px; text-align: left; }
+.cartao-foto {
+  position: relative; display: block; aspect-ratio: 3 / 4; border-radius: var(--raio); overflow: hidden; background: var(--seda);
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .5s var(--ease-out), box-shadow .5s;
+  box-shadow: 0 20px 40px -30px rgb(43 18 32 / .5);
+}
+.cartao:hover .cartao-foto { box-shadow: 0 40px 70px -30px rgb(43 18 32 / .55); }
+.cartao-foto::after { content: ''; position: absolute; inset: 0; background: radial-gradient(50% 40% at var(--bx, 50%) var(--by, 30%), rgb(255 255 255 / .35), transparent 70%); mix-blend-mode: soft-light; opacity: 0; transition: opacity .4s; }
+.cartao:hover .cartao-foto::after { opacity: 1; }
+.cartao-foto img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease-expo); }
+.cartao:hover .cartao-foto img { transform: scale(1.07); }
+.cartao-legenda { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 2px 10px; margin-top: 12px; }
+.cartao-legenda small { grid-column: 1 / -1; font-size: .66rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--laca); }
+.cartao-legenda strong { font-family: var(--serifa); font-weight: 400; font-size: 1.2rem; line-height: 1.2; }
+.cartao-legenda svg { width: 16px; height: 16px; opacity: 0; transform: translate(-6px, 6px); transition: opacity .4s, transform .5s var(--ease-expo); }
+.cartao:hover .cartao-legenda svg { opacity: 1; transform: none; color: var(--laca); }
+.galeria-mais { display: flex; justify-content: center; margin-top: clamp(56px, 7vw, 96px); }
+@media (max-width: 1023px) { .galeria-grade { grid-template-columns: repeat(3, minmax(0, 1fr)); } .galeria-grade li { translate: none !important; } }
+@media (max-width: 640px) {
+  .galeria-grade { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .filtros { flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(var(--margem) * -1); padding-inline: var(--margem); scrollbar-width: none; }
+  .filtros::-webkit-scrollbar { display: none; }
+  .filtros button { flex: none; }
+  .cartao-legenda strong { font-size: 1.02rem; }
+}
+
+/* ---------- Foto grande ---------- */
+.lb { position: fixed; inset: 0; z-index: 110; display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; color: var(--creme); }
+.lb-fundo { position: absolute; inset: 0; background: rgb(18 6 12 / .965); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); cursor: zoom-out; }
+.lb-topo, .lb-palco, .lb-base, .lb-miniaturas { position: relative; }
+.lb-topo { display: flex; justify-content: space-between; align-items: center; padding: 18px var(--margem); }
+.lb-contador { font-family: var(--serifa); font-size: 1.3rem; font-variant-numeric: tabular-nums; }
+.lb-contador i { color: var(--rosa); }
+.lb-fechar, .lb-seta { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: rgb(251 244 238 / .1); transition: background .3s, color .3s; }
+.lb-fechar:hover, .lb-seta:hover { background: var(--creme); color: var(--ameixa); }
+.lb-fechar svg, .lb-seta svg { width: 20px; height: 20px; }
+.lb-palco { min-height: 0; overflow: hidden; touch-action: pan-y; }
+.lb-figura { position: absolute; inset: 0 calc(var(--margem) + 70px); display: grid; place-items: center; }
+.lb-figura img { max-height: 100%; max-width: 100%; width: auto; height: auto; object-fit: contain; border-radius: 18px; box-shadow: 0 40px 100px rgb(0 0 0 / .5); }
+.lb-seta { position: absolute; top: 50%; translate: 0 -50%; }
+.lb-ant { left: var(--margem); }
+.lb-prox { right: var(--margem); }
+.lb-base { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px var(--margem); flex-wrap: wrap; }
+.lb-legenda { display: grid; }
+.lb-legenda small { font-size: .68rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--rosa); }
+.lb-legenda strong { font-family: var(--serifa); font-weight: 400; font-size: clamp(1.4rem, 2.6vw, 2.2rem); }
+.lb-miniaturas { display: flex; gap: 8px; padding: 0 var(--margem) max(18px, env(safe-area-inset-bottom)); overflow-x: auto; scrollbar-width: none; }
+.lb-miniaturas::-webkit-scrollbar { display: none; }
+.lb-miniaturas button { flex: none; width: 52px; aspect-ratio: 3 / 4; border-radius: 10px; overflow: hidden; opacity: .4; transition: opacity .3s, outline-color .3s; outline: 2px solid transparent; outline-offset: 2px; }
+.lb-miniaturas button.is-ativa { opacity: 1; outline-color: var(--rosa); }
+.lb-miniaturas img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 767px) {
+  .lb-seta { top: auto; bottom: -70px; translate: none; width: 46px; height: 46px; display: none; }
+  .lb-figura { inset: 0 var(--margem); }
+  .lb-base .botao { width: 100%; }
+}

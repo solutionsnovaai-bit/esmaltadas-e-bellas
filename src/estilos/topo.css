@@ -1,0 +1,63 @@
+.topo {
+  position: fixed; inset: 0 0 auto; z-index: 60; height: var(--topo-h);
+  transition: transform .7s var(--ease-expo), background-color .5s, box-shadow .5s, color .4s;
+}
+.topo::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: rgb(247 240 234 / .78); backdrop-filter: blur(18px) saturate(1.4); -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  box-shadow: 0 1px 0 var(--linha); opacity: 0; transition: opacity .5s;
+}
+.topo.is-rolado::before { opacity: 1; }
+.topo.is-escondido { transform: translateY(-110%); }
+.topo-grade { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.topo-marca { font-size: clamp(1.18rem, 1.6vw, 1.5rem); padding-block: 8px; }
+.topo-marca [data-alvo-marca] { display: inline-block; transition: opacity .2s; }
+
+.topo-nav { display: flex; gap: clamp(18px, 2.4vw, 40px); }
+.topo-nav a { position: relative; overflow: hidden; display: block; height: 1.5em; font-size: .86rem; font-weight: 600; letter-spacing: .02em; }
+.topo-nav a span { display: block; transition: transform .6s var(--ease-expo); }
+.topo-nav a span::after { content: attr(data-texto); position: absolute; left: 0; top: 100%; color: var(--laca); font-style: italic; font-family: var(--serifa); font-weight: 500; font-size: 1.08em; }
+.topo-nav a:hover span { transform: translateY(-100%); }
+
+.topo-acoes { display: flex; align-items: center; gap: 10px; }
+.topo-cta {
+  display: inline-flex; align-items: center; gap: 9px; height: 44px; padding: 0 20px 0 16px; border-radius: 999px;
+  background: var(--ameixa); color: var(--creme); font-size: .86rem; font-weight: 700;
+  transition: background .4s, transform .4s var(--ease-expo);
+}
+.topo-cta:hover { background: var(--laca); }
+.topo-menu { display: none; position: relative; width: 46px; height: 46px; border-radius: 50%; background: var(--creme); box-shadow: inset 0 0 0 1px var(--linha); }
+.topo-menu span { position: absolute; left: 14px; right: 14px; height: 1.5px; background: var(--ameixa); border-radius: 2px; transition: transform .5s var(--ease-expo), background .3s; }
+.topo-menu span:first-child { top: 19px; }
+.topo-menu span:last-child { top: 26px; right: 18px; }
+.topo.is-aberto { transform: none; }
+.topo.is-aberto::before { opacity: 0; }
+.topo.is-aberto .topo-marca, .topo.is-aberto .topo-marca .marca-e { color: var(--creme); }
+.topo.is-aberto .topo-cta { opacity: 0; pointer-events: none; }
+.topo.is-aberto .topo-menu { background: var(--laca); box-shadow: none; }
+.topo.is-aberto .topo-menu span { background: var(--creme); right: 14px; }
+.topo.is-aberto .topo-menu span:first-child { transform: translateY(3.5px) rotate(45deg); }
+.topo.is-aberto .topo-menu span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+
+.menu {
+  position: fixed; inset: 0; z-index: 55; display: flex; flex-direction: column; justify-content: space-between;
+  padding: calc(var(--topo-h) + 4svh) var(--margem) max(28px, env(safe-area-inset-bottom));
+  background: radial-gradient(90% 60% at 100% 0%, #3d1529 0%, var(--noite) 60%); color: var(--creme); overflow: hidden;
+}
+.menu-links { display: flex; flex-direction: column; gap: .4svh; }
+.menu-links a { display: flex; align-items: baseline; gap: 14px; font-family: var(--serifa); font-size: clamp(2.5rem, 12vw, 4.4rem); line-height: 1.08; letter-spacing: -.02em; }
+.menu-links a small { font-family: var(--sans); font-size: .72rem; font-weight: 700; letter-spacing: .1em; color: var(--rosa); }
+.menu-links a:active, .menu-links a:hover { font-style: italic; color: var(--rosa); }
+.menu-rodape { position: relative; display: grid; gap: 18px; justify-items: start; }
+.menu-insta { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; color: rgb(251 244 238 / .78); }
+.menu-brilho { position: absolute; right: 0; bottom: 6px; width: 64px; height: 64px; fill: var(--laca); }
+
+@media (max-width: 1023px) {
+  .topo-nav { display: none; }
+  .topo-menu { display: block; }
+  .topo-cta { height: 46px; padding: 0 16px 0 14px; }
+}
+@media (max-width: 420px) {
+  .topo-cta span { display: none; }
+  .topo-cta { width: 46px; padding: 0; justify-content: center; }
+}

@@ -1,0 +1,37 @@
+/* Abertura: o vidro de esmalte */
+.abertura { position: fixed; inset: 0; z-index: 100; pointer-events: auto; }
+.abertura.is-saindo { pointer-events: none; }
+.ab-fundo { position: absolute; inset: 0; background: radial-gradient(70% 60% at 50% 45%, #2a0f1e 0%, var(--noite) 70%); }
+.abertura.is-saindo .ab-fundo { display: none; }
+
+.ab-palco { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 18px; transform-origin: 50% 46%; }
+.ab-frasco { height: min(40svh, 340px); width: auto; overflow: visible; }
+.ab-traco { fill: none; stroke: #f3d9df; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.ab-onda { fill: var(--laca); animation: onda 2.2s linear infinite; }
+.ab-monograma { font-family: var(--serifa); font-style: italic; font-size: 34px; fill: #fff; opacity: .28; }
+.ab-contador { margin-top: 10px; font-family: var(--serifa); font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1; color: var(--creme); font-variant-numeric: tabular-nums lining-nums; letter-spacing: .02em; opacity: 0; }
+.ab-contador small { font-family: var(--sans); font-size: .4em; margin-left: 4px; color: var(--rosa); vertical-align: top; }
+.ab-legenda { font-size: .7rem; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; color: rgb(251 244 238 / .55); opacity: 0; }
+
+.ab-cortina { position: absolute; inset: 0; background: var(--laca); color: var(--laca); }
+.ab-cortina::before { content: ''; position: absolute; inset: 0; background: radial-gradient(60% 50% at 50% 40%, rgb(255 255 255 / .16), transparent 70%); }
+.ab-gotas { position: absolute; left: 0; top: calc(100% - 1px); width: 100%; height: clamp(90px, 14vw, 170px); }
+
+.ab-voo { position: fixed; left: 0; top: 0; z-index: 2; transform-origin: 0 0; pointer-events: none; }
+.ab-marca { transform-origin: 0 0; color: var(--creme); font-size: clamp(2.4rem, 8.4vw, 7.8rem); }
+.ab-marca .marca { gap: .2em; }
+.ab-marca .marca-e { color: var(--creme); }
+.ab-marca .marca-l { opacity: 0; }
+
+.ab-pular {
+  position: absolute; right: var(--margem); bottom: max(22px, env(safe-area-inset-bottom)); z-index: 3;
+  padding: 10px 2px; border-bottom: 1px solid rgb(251 244 238 / .35);
+  font-size: .72rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: rgb(251 244 238 / .7);
+  transition: color .3s, border-color .3s;
+}
+.ab-pular:hover { color: var(--creme); border-color: var(--creme); }
+.abertura.is-saindo .ab-pular { opacity: 0; }
+
+.site.is-abrindo { pointer-events: none; }
+
+@keyframes onda { from { transform: translateX(0); } to { transform: translateX(120px); } }

@@ -1,50 +1,59 @@
 # Esmaltadas & Bellas
 
-Portfólio responsivo em português com React 19, Vite, TypeScript, Tailwind 4, Motion e Lenis. A estrutura de movimento, fontes locais e ícones sociais foi adaptada do projeto `solutionsnovaai-bit/rezende-precatorios`, comparado com `solutionsnovaai-bit/rezendeprecatorios`. Os repositórios de referência não foram alterados.
+Site de uma página da esmalteria Esmaltadas & Bellas: unhas, cores e cuidado.
 
-## Desenvolvimento
+React 19, TypeScript, Vite 6, Motion 12 e Lenis. Fontes (Bodoni Moda e Manrope) e fotos servidas pelo próprio site, sem serviço externo.
 
-Instale as dependências com `npm ci`. Execute `npm run dev` para desenvolvimento e `npm run build` para a versão estática em `dist/`.
+## Rodar
 
-## Contato
+```bash
+npm ci
+npm run dev      # desenvolvimento
+npm run build    # versão final em dist/
+```
+
+## O que tem no site
+
+- **Abertura "o vidro de esmalte"**: um traço desenha o vidro, o esmalte laca enche conforme o site carrega de verdade (fontes e foto do topo), um reflexo passa, a cor transborda pela tela, o nome aparece e voa até o topo enquanto a cortina de esmalte sobe escorrendo. Na volta à página (mesma sessão) a abertura é curta; com movimento reduzido, não há abertura.
+- **Hero editorial**: título em Bodoni, a equipe dentro de uma moldura com formato de unha e reflexo que acompanha o mouse, minifotos com profundidade e selo girando.
+- **Faixas cruzadas** que aceleram e invertem com a rolagem.
+- **Vitrine**: carrossel infinito que corre sozinho, para no mouse, arrasta com inércia e tem lupa no desktop.
+- **Manifesto** que acende palavra por palavra.
+- **Cena das cores** (rolagem presa à tela): a tampa do esmalte treme, gira e sobe com o pincel, uma gota cai, o esmalte escorre e cobre a tela; depois quatro humores (delicada, intensa, autêntica, radiante) trocam a cor da tela, do vidro e da foto.
+- **Cuidados**: lista grande; no desktop a foto do cuidado segue o mouse; cada item abre com o botão de agendar já com a mensagem pronta.
+- **Inspirações**: filtros com marcador deslizante, cartões com inclinação e reflexo, foto grande com setas, teclado, arrastar e miniaturas.
+- **Equipe**, **Como agendar** (pincelada que se desenha com a rolagem), **Agendar** (monta a mensagem e mostra como balão de conversa), **Instagram** (fotos que se abrem em leque) e **rodapé** com a assinatura "Bellas.".
+- Cursor próprio no desktop, granulação de filme, barra de leitura e botão flutuante de conversa.
+
+## Contato e WhatsApp
 
 Instagram: https://www.instagram.com/esmaltadasebellas/
 
-O número de WhatsApp está intencionalmente vazio. Para ativar, copie `.env.example` para `.env.local`, informe `VITE_WHATSAPP_NUMBER` com o número real incluindo país e DDD (apenas dígitos) e faça um novo build/deploy. Até então, o balão explica a disponibilidade e direciona ao Instagram. Nenhum número fictício é utilizado.
+O número de WhatsApp ainda não foi informado. Enquanto estiver vazio, todos os botões levam ao Instagram e o formulário copia a mensagem para colar no Direct. Para ativar, escolha **um** dos caminhos:
 
-Os campos de contato apenas montam uma mensagem local. Não há armazenamento, envio de formulário ou confirmação automática de agendamento. O visitante copia a mensagem e envia no Instagram; com WhatsApp configurado, ela é anexada ao link `wa.me`.
+1. Edite `src/conteudo/site.ts` e preencha `NUMERO_WHATSAPP` (país + DDD + número, só dígitos, ex.: `5511999999999`); ou
+2. Na Vercel, crie a variável `VITE_WHATSAPP_NUMBER` com o mesmo formato e faça um novo deploy.
 
-## Imagens
+Com o número, os botões passam a abrir o WhatsApp com a mensagem pronta e o link aparece no rodapé.
 
-25 fotografias/artes fornecidas pelo cliente, em duas resoluções WebP (50 arquivos). A coleção tem 23 imagens de trabalhos e atendimento, além da foto da equipe e da arte principal. A foto do ambiente com a televisão foi excluída. O manifesto tipado é `src/assets.ts`.
+## Textos e fotos
 
-As imagens foram recortadas, limpas e ampliadas a partir dos prints fornecidos; ampliações por IA não equivalem aos originais da câmera. Não há avaliações, endereço, preços, telefone ou horários inventados.
+- Todos os textos estão em `src/conteudo/textos.ts`. Não há preço, endereço, horário ou avaliação inventados.
+- As fotos estão em `public/fotos/` (uma resolução, WebP) e listadas em `src/conteudo/fotos.ts`.
+- Imagem de compartilhamento (WhatsApp, Instagram etc.): `public/og.jpg`.
 
-## Interações e acessibilidade
+## Acessibilidade e conforto
 
-- Abertura a cada carregamento, com opção de pular.
-- Parallax, revelações, botões magnéticos, faixa contínua e troca de paletas.
-- Preferência `prefers-reduced-motion` respeitada; botão para pausar movimento.
-- Rolagem nativa em telas de toque; Lenis apenas com ponteiro fino.
-- Filtros, coleção completa, lightbox com teclado, swipe, Escape e gerenciamento de foco.
-- Menu móvel com foco contido e fechamento por Escape.
-- Fontes hospedadas localmente; imagens responsivas e carregamento sob demanda.
-- Ícones oficiais Instagram/WhatsApp via Simple Icons, mantidos sem alteração. Licença em `docs/licenses/simple-icons-LICENSE.md`; fontes e Lenis em `docs/licencas/`.
+- `prefers-reduced-motion` respeitado; botão **Reduzir animações** no rodapé (fica salvo no navegador).
+- Rolagem nativa no celular; inércia só com mouse.
+- Menu do celular e foto grande com foco preso, Esc para fechar e navegação por teclado.
+- Animações contínuas param quando a seção sai da tela ou a aba fica em segundo plano.
 
 ## Deploy na Vercel
 
-1. Importe `solutionsnovaai-bit/esmaltadas-e-bellas` na Vercel.
-2. Use a branch `main` e a raiz do repositório como Root Directory.
-3. Clique em Deploy. O arquivo `vercel.json` já define **Vite**, instalação `npm ci`, build `npm run build` e saída `dist`.
+1. Importe o repositório na Vercel, branch `main`, raiz do repositório.
+2. Deploy. O `vercel.json` já define Vite, `npm ci`, `npm run build` e a pasta `dist`.
 
-Node.js 22 é definido em `package.json`. Não há servidor, banco de dados ou variável obrigatória para o primeiro deploy. O WhatsApp permanece sem número e o Instagram funciona como contato.
+O build gera canonical, Open Graph, dados estruturados, `sitemap.xml` e `robots.txt` com o domínio de produção da Vercel. Para fixar um domínio próprio, defina `VITE_SITE_URL=https://seu-dominio.com.br`.
 
-O build detecta o domínio de produção pelas variáveis da Vercel para gerar canonical, Open Graph, dados estruturados, `sitemap.xml` e `robots.txt`. Para fixar um domínio próprio, defina opcionalmente `VITE_SITE_URL=https://seu-dominio.com.br` nas configurações da Vercel e refaça o deploy. Para ativar o WhatsApp, defina `VITE_WHATSAPP_NUMBER` com o número real, país e DDD, apenas dígitos, e refaça o deploy.
-
-Não envie `.env.local`, credenciais, `node_modules` ou `dist` ao GitHub. O repositório contém o código-fonte, as fontes locais e todos os assets. A Vercel gera a versão de produção a partir do commit.
-
-Referências de configuração: [Vite na Vercel](https://vercel.com/docs/frameworks/frontend/vite), [vercel.json](https://vercel.com/docs/project-configuration/vercel-json) e [variáveis de ambiente](https://vercel.com/docs/environment-variables/system-environment-variables).
-
-## Verificações
-
-Compilação TypeScript, build de produção, integridade dos 50 arquivos WebP, 23 entradas da galeria, exclusão da foto da televisão e geração de metadados/sitemap com um domínio de teste. A inspeção visual em navegador não foi executada no ambiente gerenciado; os movimentos, filtros e contato estão implementados no código.
+Licenças de terceiros (fontes, Lenis e ícones): `docs/LICENCAS.md`.
